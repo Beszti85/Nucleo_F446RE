@@ -1,0 +1,6 @@
+../ChipDrivers/Src/lcd_char.c:25:6:LcdInit_MSP23S17	24	static
+../ChipDrivers/Src/lcd_char.c:53:6:LcdInit_GPIO	16	static
+../ChipDrivers/Src/lcd_char.c:81:6:LcdInit_PCF8574	16	static
+../ChipDrivers/Src/lcd_char.c:105:6:LcdPuts	24	static
+../ChipDrivers/Src/lcd_char.c:166:6:LcdPuts_basic	24	static
+../ChipDrivers/Src/lcd_char.c:186:6:LcdClrScr	8	static

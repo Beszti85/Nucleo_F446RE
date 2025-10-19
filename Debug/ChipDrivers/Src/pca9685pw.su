@@ -1,0 +1,2 @@
+../ChipDrivers/Src/pca9685pw.c:11:6:PCA9685_ReadModeRegs	24	static
+../ChipDrivers/Src/pca9685pw.c:27:6:PCA9685_ToggleOutputEnable	16	static
