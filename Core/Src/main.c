@@ -27,6 +27,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 typedef StaticTask_t osStaticThreadDef_t;
+typedef StaticEventGroup_t osStaticEventGroupDef_t;
 /* USER CODE BEGIN PTD */
 
 /* USER CODE END PTD */
@@ -56,29 +57,49 @@ TIM_HandleTypeDef htim4;
 UART_HandleTypeDef huart2;
 DMA_HandleTypeDef hdma_usart2_rx;
 
-/* Definitions for defaultTask */
-osThreadId_t defaultTaskHandle;
-uint32_t defaultTaskBuffer[ 128 ];
-osStaticThreadDef_t defaultTaskControlBlock;
-const osThreadAttr_t defaultTask_attributes = {
-  .name = "defaultTask",
-  .cb_mem = &defaultTaskControlBlock,
-  .cb_size = sizeof(defaultTaskControlBlock),
-  .stack_mem = &defaultTaskBuffer[0],
-  .stack_size = sizeof(defaultTaskBuffer),
+/* Definitions for Task10ms */
+osThreadId_t Task10msHandle;
+uint32_t Task10msBuffer[ 128 ];
+osStaticThreadDef_t Task10msControlBlock;
+const osThreadAttr_t Task10ms_attributes = {
+  .name = "Task10ms",
+  .cb_mem = &Task10msControlBlock,
+  .cb_size = sizeof(Task10msControlBlock),
+  .stack_mem = &Task10msBuffer[0],
+  .stack_size = sizeof(Task10msBuffer),
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for myTask02 */
-osThreadId_t myTask02Handle;
-uint32_t myTask02Buffer[ 128 ];
-osStaticThreadDef_t myTask02ControlBlock;
-const osThreadAttr_t myTask02_attributes = {
-  .name = "myTask02",
-  .cb_mem = &myTask02ControlBlock,
-  .cb_size = sizeof(myTask02ControlBlock),
-  .stack_mem = &myTask02Buffer[0],
-  .stack_size = sizeof(myTask02Buffer),
+/* Definitions for ComTask */
+osThreadId_t ComTaskHandle;
+uint32_t ComTaskBuffer[ 128 ];
+osStaticThreadDef_t ComTaskControlBlock;
+const osThreadAttr_t ComTask_attributes = {
+  .name = "ComTask",
+  .cb_mem = &ComTaskControlBlock,
+  .cb_size = sizeof(ComTaskControlBlock),
+  .stack_mem = &ComTaskBuffer[0],
+  .stack_size = sizeof(ComTaskBuffer),
   .priority = (osPriority_t) osPriorityLow,
+};
+/* Definitions for Task1sec */
+osThreadId_t Task1secHandle;
+uint32_t Task1secBuffer[ 128 ];
+osStaticThreadDef_t Task1secControlBlock;
+const osThreadAttr_t Task1sec_attributes = {
+  .name = "Task1sec",
+  .cb_mem = &Task1secControlBlock,
+  .cb_size = sizeof(Task1secControlBlock),
+  .stack_mem = &Task1secBuffer[0],
+  .stack_size = sizeof(Task1secBuffer),
+  .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for EventComTask */
+osEventFlagsId_t EventComTaskHandle;
+osStaticEventGroupDef_t myEvent01ControlBlock;
+const osEventFlagsAttr_t EventComTask_attributes = {
+  .name = "EventComTask",
+  .cb_mem = &myEvent01ControlBlock,
+  .cb_size = sizeof(myEvent01ControlBlock),
 };
 /* USER CODE BEGIN PV */
 volatile uint16_t ADC_RawData[6u] = {0u};
@@ -104,8 +125,9 @@ static void MX_ADC1_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_TIM4_Init(void);
 static void MX_SPI1_Init(void);
-void StartDefaultTask(void *argument);
-void StartTask02(void *argument);
+void StartTask10ms(void *argument);
+void StartComTask(void *argument);
+void StartTask1sec(void *argument);
 
 /* USER CODE BEGIN PFP */
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
@@ -186,15 +208,22 @@ int main(void)
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* creation of defaultTask */
-  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+  /* creation of Task10ms */
+  Task10msHandle = osThreadNew(StartTask10ms, NULL, &Task10ms_attributes);
 
-  /* creation of myTask02 */
-  myTask02Handle = osThreadNew(StartTask02, NULL, &myTask02_attributes);
+  /* creation of ComTask */
+  ComTaskHandle = osThreadNew(StartComTask, NULL, &ComTask_attributes);
+
+  /* creation of Task1sec */
+  Task1secHandle = osThreadNew(StartTask1sec, NULL, &Task1sec_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
+
+  /* Create the event(s) */
+  /* creation of EventComTask */
+  EventComTaskHandle = osEventFlagsNew(&EventComTask_attributes);
 
   /* USER CODE BEGIN RTOS_EVENTS */
   /* add events, ... */
@@ -638,14 +667,14 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE END 4 */
 
-/* USER CODE BEGIN Header_StartDefaultTask */
+/* USER CODE BEGIN Header_StartTask10ms */
 /**
-  * @brief  Function implementing the defaultTask thread.
+  * @brief  Function implementing the Task10ms thread.
   * @param  argument: Not used
   * @retval None
   */
-/* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void *argument)
+/* USER CODE END Header_StartTask10ms */
+void StartTask10ms(void *argument)
 {
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
@@ -656,22 +685,40 @@ void StartDefaultTask(void *argument)
   /* USER CODE END 5 */
 }
 
-/* USER CODE BEGIN Header_StartTask02 */
+/* USER CODE BEGIN Header_StartComTask */
 /**
-* @brief Function implementing the myTask02 thread.
+* @brief Function implementing the ComTask thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_StartTask02 */
-void StartTask02(void *argument)
+/* USER CODE END Header_StartComTask */
+void StartComTask(void *argument)
 {
-  /* USER CODE BEGIN StartTask02 */
+  /* USER CODE BEGIN StartComTask */
   /* Infinite loop */
   for(;;)
   {
     osDelay(1);
   }
-  /* USER CODE END StartTask02 */
+  /* USER CODE END StartComTask */
+}
+
+/* USER CODE BEGIN Header_StartTask1sec */
+/**
+* @brief Function implementing the Task1sec thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTask1sec */
+void StartTask1sec(void *argument)
+{
+  /* USER CODE BEGIN StartTask1sec */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartTask1sec */
 }
 
 /**

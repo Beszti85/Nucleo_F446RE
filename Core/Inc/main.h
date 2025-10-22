@@ -61,6 +61,7 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define LCD_DISP_LENGTH 16
 #define LCD_LINES 2
+#define VCP_EVENT_FLAG_MASK 0x00000001uL
 #define B1_Pin GPIO_PIN_13
 #define B1_GPIO_Port GPIOC
 #define USART_TX_Pin GPIO_PIN_2
