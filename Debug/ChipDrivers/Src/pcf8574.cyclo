@@ -1,4 +1,0 @@
-../ChipDrivers/Src/pcf8574.c:13:9:PCF8574_ReadPort	1
-../ChipDrivers/Src/pcf8574.c:22:6:PCF8574_WritePort	1
-../ChipDrivers/Src/pcf8574.c:29:6:PCF8574_ReadPin	2
-../ChipDrivers/Src/pcf8574.c:44:6:PCF8574_WritePin	2

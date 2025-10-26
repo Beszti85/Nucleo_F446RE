@@ -1,7 +1,0 @@
-../ChipDrivers/Src/bme280.c:66:6:BME280_Detect	2
-../ChipDrivers/Src/bme280.c:80:6:BME280_StartMeasurement	1
-../ChipDrivers/Src/bme280.c:92:6:BME280_ReadMeasResult	1
-../ChipDrivers/Src/bme280.c:108:13:ReadCalibParams	1
-../ChipDrivers/Src/bme280.c:139:13:CalculateTemperature	3
-../ChipDrivers/Src/bme280.c:170:13:CalculatePressure	4
-../ChipDrivers/Src/bme280.c:217:13:CalculateHumidity	3

@@ -1,5 +1,0 @@
-../ChipDrivers/Src/lcd_6pin_io.c:17:6:LcdToggleE	1
-../ChipDrivers/Src/lcd_6pin_io.c:26:6:LcdWrite	10
-../ChipDrivers/Src/lcd_6pin_io.c:96:6:LcdPortInit_GPIO	1
-../ChipDrivers/Src/lcd_6pin_io.c:123:13:ClearPort	1
-../ChipDrivers/Src/lcd_6pin_io.c:133:13:ClearData	1
