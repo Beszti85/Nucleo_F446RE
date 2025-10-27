@@ -682,7 +682,13 @@ void StartTask10ms(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    // Convert ADC raw data from last running
+    for( uint16_t i = 0u; i < 5u; i++ )
+    {
+      ADC_Voltage[i] = (float)ADC_RawData[i] * 3.3f / 4096.0f;
+    }
+    HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&ADC_RawData[0u], 5u);
+    osDelay(100);
   }
   /* USER CODE END 5 */
 }
@@ -697,9 +703,18 @@ void StartTask10ms(void *argument)
 void StartComTask(void *argument)
 {
   /* USER CODE BEGIN StartComTask */
+  uint16_t pcUartTxSize = 0u;
   /* Infinite loop */
   for(;;)
   {
+    uint32_t eventFlags = osEventFlagsWait(EventComTaskHandle, VCP_EVENT_FLAG_MASK, osFlagsWaitAny, osWaitForever);
+    if( eventFlags |= VCP_EVENT_FLAG_MASK)
+    {
+      // Process the incoming frame from PC
+      osEventFlagsClear(EventComTaskHandle, VCP_EVENT_FLAG_MASK);
+      //pcUartTxSize = PCUART_ProcessRxCmd(UART_PcRxBuffer, UART_PcTxBuffer);
+      HAL_UART_Transmit(&huart2, UART_PcTxBuffer, pcUartTxSize, 500);
+    }
     osDelay(1);
   }
   /* USER CODE END StartComTask */
