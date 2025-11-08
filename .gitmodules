@@ -1,3 +1,6 @@
 [submodule "ChipDrivers"]
 	path = ChipDrivers
 	url = https://github.com/Beszti85/ChipDrivers.git
+[submodule "FwLibraries"]
+	path = FwLibraries
+	url = https://github.com/Beszti85/FwLibraries.git
