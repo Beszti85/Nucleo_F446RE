@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "lcd_char.h"
+#include "ds1307.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -113,6 +114,9 @@ uint8_t UART_PcRxPktLength = 0u;
 uint8_t UART_PcTxBuffer[256u];
 
 uint32_t TIM1_PwmDutyCycle = 0u;
+
+DS1307_Handler_t DS1307_Handler;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
