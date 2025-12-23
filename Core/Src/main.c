@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "lcd_char.h"
 #include "ds1307.h"
+#include "pc_uart_handler.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -716,7 +717,7 @@ void StartComTask(void *argument)
     {
       // Process the incoming frame from PC
       osEventFlagsClear(EventComTaskHandle, VCP_EVENT_FLAG_MASK);
-      //pcUartTxSize = PCUART_ProcessRxCmd(UART_PcRxBuffer, UART_PcTxBuffer);
+      pcUartTxSize = PCUART_ProcessRxCmd(UART_PcRxBuffer, UART_PcTxBuffer);
       HAL_UART_Transmit(&huart2, UART_PcTxBuffer, pcUartTxSize, 500);
     }
     osDelay(1);

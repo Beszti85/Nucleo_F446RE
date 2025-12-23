@@ -16,6 +16,7 @@
 #define BME280_PHYSICAL_VALUES   1u
 #define ADC_PHY_VALUES           2u
 #define FLASH_ID                 3u
+#define DS1307_READ_TIME         4u
 
 uint8_t PC_ReadDataHandler( uint8_t readId, uint8_t* ptrTxBuffer );
 

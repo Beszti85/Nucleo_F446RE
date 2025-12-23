@@ -8,6 +8,7 @@
 #include "pc_data_readwrite.h"
 #include "bme280.h"
 #include "flash.h"
+#include "ds1307.h"
 
 extern BME280_PhysValues_t BME280_PhysicalValues;
 extern FLASH_Handler_t FlashHandler;
@@ -30,7 +31,10 @@ uint8_t PC_ReadDataHandler( uint8_t readId, uint8_t* ptrTxBuffer )
       memcpy(ptrTxBuffer, ADC_Voltage, sizeof(ADC_Voltage));
       retval = 20u;
       break;
-    // Read Humidity BME280
+    // DS1307 time read
+    case DS1307_READ_TIME:
+      // TODO
+      break;
     default:
       break;
   }
