@@ -45,6 +45,14 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+    ${CMAKE_SOURCE_DIR}/Core/Src/main.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/pc_data_readwrite.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/pc_act_cmd.c
+    ${CMAKE_SOURCE_DIR}/FwLibraries/Src/pc_uart_handler.c
+    ${CMAKE_SOURCE_DIR}/ChipDrivers/Src/flash.c
+    ${CMAKE_SOURCE_DIR}/ChipDrivers/Src/ds1307.c
+    ${CMAKE_SOURCE_DIR}/ChipDrivers/Src/lcd_char.c
+    ${CMAKE_SOURCE_DIR}/ChipDrivers/Src/lcd_6pin_io.c
 )
 
 # Add include paths

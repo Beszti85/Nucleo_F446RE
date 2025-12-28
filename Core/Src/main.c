@@ -25,6 +25,7 @@
 #include "lcd_char.h"
 #include "ds1307.h"
 #include "pc_uart_handler.h"
+#include "flash.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -117,6 +118,13 @@ uint8_t UART_PcTxBuffer[256u];
 uint32_t TIM1_PwmDutyCycle = 0u;
 
 DS1307_Handler_t DS1307_Handler;
+
+FLASH_Handler_t FlashHandler =
+{
+  .ptrHSpi = &hspi1,
+  .portCS  = NULL, //CS_FLASH_GPIO_Port,
+  .pinCS   = 0     //CS_FLASH_Pin
+};
 
 /* USER CODE END PV */
 

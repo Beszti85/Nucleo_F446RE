@@ -17,7 +17,11 @@
 #define ADC_PHY_VALUES           2u
 #define FLASH_ID                 3u
 #define DS1307_READ_TIME         4u
+#define FLASH_READ               5u
+
+#define FLASH_CFG_WRITE          1u
 
 uint8_t PC_ReadDataHandler( uint8_t readId, uint8_t* ptrTxBuffer );
+void PC_WriteDataHandler( uint8_t* ptrTxBuffer );
 
 #endif /* INC_PC_DATA_READWRITE_H_ */
