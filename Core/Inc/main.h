@@ -80,8 +80,8 @@ void Error_Handler(void);
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
 #define TCK_GPIO_Port GPIOA
-#define SWO_Pin GPIO_PIN_3
-#define SWO_GPIO_Port GPIOB
+#define SD_CS_Pin GPIO_PIN_3
+#define SD_CS_GPIO_Port GPIOB
 #define LCD_D5_Pin GPIO_PIN_4
 #define LCD_D5_GPIO_Port GPIOB
 #define LCD_D4_Pin GPIO_PIN_5
