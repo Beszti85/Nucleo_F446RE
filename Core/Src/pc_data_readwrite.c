@@ -25,21 +25,21 @@ uint8_t PC_ReadDataHandler( uint8_t readId, uint8_t* ptrTxBuffer )
   switch (readId)
   {
     // Read board name
-    case BOARD_ID:
+    case PC_RD_BOARD_ID:
       memcpy(ptrTxBuffer, "NucleoF446RE", sizeof("NucleoF446RE"));
       retval = sizeof("NucleoF446RE");
       break;
     // Read ADC data
-    case ADC_PHY_VALUES:
+    case PC_RD_ADC_PHY_VALUES:
       memcpy(ptrTxBuffer, ADC_Voltage, sizeof(ADC_Voltage));
       retval = 20u;
       break;
     // DS1307 time read
-    case DS1307_READ_TIME:
+    case PC_RD_DS1307_READ_TIME:
       // TODO
       break;
     // Read Flash data
-    case FLASH_READ:
+    case PC_RD_FLASH_READ:
       FLASH_Read(&FlashHandler, PcExtFlashReadAddress, ptrTxBuffer, PcExtFlashReadLength);
       retval = PcExtFlashReadLength;
       break;
@@ -57,7 +57,7 @@ void PC_WriteDataHandler( uint8_t* ptrTxBuffer )
   switch (writeId)
   {
     // Set flash read address
-    case FLASH_CFG_WRITE:
+    case PC_WR_FLASH_CFG_WRITE:
       memcpy(&PcExtFlashReadAddress, ptrTxBuffer, sizeof(PcExtFlashReadAddress));
       memcpy(&PcExtFlashReadLength, ptrTxBuffer + sizeof(PcExtFlashReadAddress), sizeof(PcExtFlashReadLength));
       break;
